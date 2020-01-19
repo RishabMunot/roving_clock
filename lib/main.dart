@@ -41,6 +41,7 @@ class _FlutterClockState extends State<FlutterClock> {
   var off_x, off_y;
   String day = "", date1 = "", date2 = "";
   double zoomout = 0;
+  String ampm = "images/coffee.png";
 
   @override
   void initState() {
@@ -72,6 +73,12 @@ class _FlutterClockState extends State<FlutterClock> {
           angleHour = nowHour * 30 * pi / 180;
           preHour = nowHour;
         }
+// Getting AM-PM
+        if (DateFormat('a').format(_now) == 'PM')
+          ampm = 'images/beer.png';
+        else
+          ampm = 'images/coffee.png';
+        print(DateFormat('a').format(_now));
       });
     });
     super.initState();
@@ -97,8 +104,8 @@ class _FlutterClockState extends State<FlutterClock> {
     ws = (2 * 74 * w / 55) * (1 - zoomout);
     wm = ws * 63 / 74;
     wh = ws * 52 / 74;
-    off_x = w*0.07;
-    off_y = w*0.05;
+    off_x = w * 0.07;
+    off_y = w * 0.05;
 
     return Scaffold(
         backgroundColor: Color(0xffeaeaea),
@@ -107,8 +114,8 @@ class _FlutterClockState extends State<FlutterClock> {
             children: <Widget>[
 //SECOND
               Positioned(
-                bottom: -ws / 2 + w * 0.15 - ws * zoomout / 2 +off_y,
-                right: 2 * w / 5 - w * 0.06 + ws * zoomout / 2-off_x,
+                bottom: -ws / 2 + w * 0.15 - ws * zoomout / 2 + off_y,
+                right: 2 * w / 5 - w * 0.06 + ws * zoomout / 2 - off_x,
                 child: Transform.rotate(
                   angle: -angle,
                   // angle: 0,
@@ -121,8 +128,8 @@ class _FlutterClockState extends State<FlutterClock> {
 
 // MINUTE
               Positioned(
-                bottom: -wm / 2 +w * 0.15 - wm * zoomout / 2+off_y,
-                right: 3 * w / 5 - w * 0.06 + wm * zoomout / 2-off_x,
+                bottom: -wm / 2 + w * 0.15 - wm * zoomout / 2 + off_y,
+                right: 3 * w / 5 - w * 0.06 + wm * zoomout / 2 - off_x,
                 child: Transform.rotate(
                   angle: 126 * pi / 180 - angleMinute,
                   child: Image.asset(
@@ -134,8 +141,8 @@ class _FlutterClockState extends State<FlutterClock> {
 
 //HOUR
               Positioned(
-                bottom: -wh / 2 + w * 0.15 - wh * zoomout / 2+off_y,
-                right: 4 * w / 5 - w * 0.06 + wh * zoomout / 2-off_x,
+                bottom: -wh / 2 + w * 0.15 - wh * zoomout / 2 + off_y,
+                right: 4 * w / 5 - w * 0.06 + wh * zoomout / 2 - off_x,
                 child: Transform.rotate(
                   angle: -angleHour,
                   child: Image.asset(
@@ -162,7 +169,7 @@ class _FlutterClockState extends State<FlutterClock> {
                   height: h * 0.3 * (1 - zoomout),
                 ),
                 bottom: off_y,
-                left: w / 5 * (1 - zoomout)+off_x,
+                left: w / 5 * (1 - zoomout) + off_x,
               ),
 
 // overlay second
@@ -172,7 +179,7 @@ class _FlutterClockState extends State<FlutterClock> {
                   height: h * 0.3 * (1 - zoomout),
                 ),
                 bottom: off_y,
-                left: 2 * w / 5 * (1 - zoomout) + w * 0.01+off_x,
+                left: 2 * w / 5 * (1 - zoomout) + w * 0.01 + off_x,
               ),
 
 //TIME STAMP
@@ -180,7 +187,7 @@ class _FlutterClockState extends State<FlutterClock> {
                 top: 50,
                 right: 50,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       day,
@@ -193,7 +200,7 @@ class _FlutterClockState extends State<FlutterClock> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(w*0.02, 0, 0,0),
+                          // margin: EdgeInsets.fromLTRB(w * 0.02, 0, 0, 0),
                           child: Text(
                             date1,
                             style: TextStyle(
@@ -203,7 +210,7 @@ class _FlutterClockState extends State<FlutterClock> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0,0, w*0.015),
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, w * 0.015),
                           child: Text(
                             date2,
                             style: TextStyle(
@@ -213,6 +220,14 @@ class _FlutterClockState extends State<FlutterClock> {
                           ),
                         )
                       ],
+                    ),
+                    Container(
+                      child: Image.asset(
+                        ampm,
+                        height: w *0.085,
+
+                      ),
+                      margin: EdgeInsets.fromLTRB(0, w*0.05,0,0),
                     ),
                   ],
                 ),
