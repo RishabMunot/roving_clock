@@ -105,7 +105,7 @@ class _FlutterClockState extends State<FlutterClock> {
     wm = ws * 63 / 74;
     wh = ws * 52 / 74;
     off_x = w * 0.07;
-    off_y = w * 0.05;
+    off_y = w * 0.17;
 
     return Scaffold(
         backgroundColor: Color(0xffeaeaea),
@@ -224,10 +224,9 @@ class _FlutterClockState extends State<FlutterClock> {
                     Container(
                       child: Image.asset(
                         ampm,
-                        height: w *0.085,
-
+                        height: w * 0.085,
                       ),
-                      margin: EdgeInsets.fromLTRB(0, w*0.05,0,0),
+                      margin: EdgeInsets.fromLTRB(0, w * 0.05, 0, 0),
                     ),
                   ],
                 ),
